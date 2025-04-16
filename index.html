@@ -52,7 +52,7 @@
     }
     
     .ad-container {
-      margin: 2rem 0;
+      margin: 1rem 0;
       text-align: center;
       position: relative;
     }
@@ -76,6 +76,7 @@
       background-color: #f0f8ff;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
+      margin: 1.5rem 0;
     }
     
     .ad-highlight:hover {
@@ -149,61 +150,244 @@
       border-top: 1px solid #e0e0e0;
     }
     
+    .floating-ad {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 1000;
+      width: 250px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      padding: 1rem;
+      animation: bounce 2s infinite;
+    }
+    
+    .floating-ad-close {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
     @keyframes pulse {
       0% { opacity: 1; }
       50% { opacity: 0.8; }
       100% { opacity: 1; }
     }
     
-    .separator {
-      height: 1px;
-      background-color: #e0e0e0;
-      margin: 2rem 0;
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      z-index: 2000;
+      display: none;
+      justify-content: center;
+      align-items: center;
     }
     
-    .limited-offer {
-      background: linear-gradient(135deg, #fff6e6, #ffebcc);
+    .popup-content {
+      background-color: white;
       border-radius: 8px;
-      padding: 1rem;
-      border: 1px dashed #ff9800;
-      margin: 1.5rem 0;
+      padding: 2rem;
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+      box-shadow: 0 0 30px rgba(0,0,0,0.3);
+      text-align: center;
     }
     
-    .banner {
-      background: linear-gradient(135deg, #3498db, #2980b9);
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    }
+    
+    .popup-heading {
+      color: #e74c3c;
+      animation: pulse 1s infinite;
+    }
+    
+    .ribbon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #e74c3c;
+      color: white;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      transform: rotate(45deg) translateX(30px) translateY(-10px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .top-banner {
+      background: linear-gradient(135deg, #ff9966, #ff5e62);
       color: white;
       padding: 1rem;
       text-align: center;
-      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .glow {
+      animation: glow 1.5s infinite alternate;
+    }
+    
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #e60073, 0 0 20px #e60073;
+      }
+      to {
+        text-shadow: 0 0 10px #fff, 0 0 20px #ff4da6, 0 0 30px #ff4da6, 0 0 40px #ff4da6;
+      }
+    }
+    
+    .banner-strip {
+      background-color: #f39c12;
+      color: white;
+      padding: 0.5rem;
+      text-align: center;
+      font-weight: bold;
       margin: 1rem 0;
     }
     
-    .related-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-    
-    .related-item {
+    .top-right-ad {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      width: 180px;
       background-color: white;
       border-radius: 8px;
-      padding: 1rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      padding: 0.5rem;
     }
     
-    .related-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    .shake {
+      animation: shake 4s cubic-bezier(.36,.07,.19,.97) infinite;
+      transform: translate3d(0, 0, 0);
+    }
+    
+    @keyframes shake {
+      0%, 90%, 100% { transform: translate3d(0, 0, 0); }
+      92%, 96% { transform: translate3d(-5px, 0, 0); }
+      94%, 98% { transform: translate3d(5px, 0, 0); }
+    }
+    
+    .interstitial {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255,255,255,0.95);
+      z-index: 3000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    
+    .interstitial-content {
+      max-width: 800px;
+      width: 90%;
+      text-align: center;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+    
+    .interstitial-close {
+      margin-top: 1rem;
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .interstitial-timer {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 1rem 0;
+      color: #e74c3c;
+    }
+    
+    .exit-intent {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      z-index: 4000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .exit-intent-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    
+    .exit-intent-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .highlight-text {
+      background-color: #ffeb3b;
+      padding: 0 5px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
+  <div class="top-banner">
+    <h3 class="glow">🔥 ¡OFERTA EXCLUSIVA SOLO HOY! 🔥</h3>
+    <p>Accede a nuestro contenido premium con un <span class="highlight-text">50% DE DESCUENTO</span></p>
+    <!-- Primer anuncio en banner superior -->
+    <div class="ad-container">
+      <script type="text/javascript"> atOptions = { 'key' : 'f6088f4d0f8e60d5aa5832d5695753bb', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} }; </script> 
+      <script type="text/javascript" src="//www.highperformanceformat.com/f6088f4d0f8e60d5aa5832d5695753bb/invoke.js"></script>
+    </div>
+  </div>
+  
   <header>
     <h1>Contenido Premium Exclusivo</h1>
     <p>Accede a nuestro contenido de alta calidad ahora mismo</p>
   </header>
+  
+  <div class="top-right-ad shake">
+    <div class="ad-label">OFERTA ESPECIAL</div>
+    <!-- Tercer anuncio en esquina superior derecha -->
+    <script type='text/javascript' src='//pl26364849.profitableratecpm.com/63/c4/ef/63c4ef37398a7c28979f0f2b8e83e1c5.js'></script>
+  </div>
   
   <div class="container">
     <div class="urgent-notice">
@@ -212,15 +396,19 @@
       <div class="countdown" id="countdown">Oferta expira en: 05:00</div>
     </div>
     
+    <div class="banner-strip">
+      🎁 ¡REGALOS EXCLUSIVOS PARA LOS PRIMEROS 50 VISITANTES DE HOY! 🎁
+    </div>
+    
     <div class="content-area">
       <h2>Bienvenido a nuestra plataforma exclusiva</h2>
-      <p>Estás a punto de descubrir contenido premium que ha ayudado a miles de personas a transformar sus vidas. Antes de continuar, échale un vistazo a estas ofertas especialmente seleccionadas para ti.</p>
+      <p>Estás a punto de descubrir contenido premium que ha ayudado a miles de personas a transformar sus vidas.</p>
       
+      <!-- Segundo anuncio en medio del contenido principal -->
       <div class="ad-container ad-highlight">
-        <div class="ad-label">OFERTA RECOMENDADA PARA TI</div>
-        <!-- Primer anuncio -->
-        <script type="text/javascript"> atOptions = { 'key' : 'f6088f4d0f8e60d5aa5832d5695753bb', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} }; </script> 
-        <script type="text/javascript" src="//www.highperformanceformat.com/f6088f4d0f8e60d5aa5832d5695753bb/invoke.js"></script>
+        <div class="ad-label">RECOMENDADO PARA TI HOY</div>
+        <script type="text/javascript"> atOptions = { 'key' : 'd5057e78d993d8d7e4b858d86eecb789', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </script> 
+        <script type="text/javascript" src="//www.highperformanceformat.com/d5057e78d993d8d7e4b858d86eecb789/invoke.js"></script>
         <p><strong>👆 El 94% de nuestros usuarios recomiendan este producto</strong></p>
       </div>
       
@@ -237,19 +425,6 @@
       
       <a href="#" class="cta-button">DESCUBRE MÁS AHORA</a>
     </div>
-    
-    <div class="limited-offer">
-      <h3>🔥 OFERTA RELÁMPAGO 🔥</h3>
-      <p>Esta oferta especial está disponible solo para los próximos visitantes. ¡No te la pierdas!</p>
-      
-      <div class="ad-container">
-        <!-- Segundo anuncio -->
-        <script type="text/javascript"> atOptions = { 'key' : 'd5057e78d993d8d7e4b858d86eecb789', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </script> 
-        <script type="text/javascript" src="//www.highperformanceformat.com/d5057e78d993d8d7e4b858d86eecb789/invoke.js"></script>
-      </div>
-    </div>
-    
-    <div class="separator"></div>
     
     <div class="video-container">
       <h3 style="color: white;">Contenido Exclusivo</h3>
@@ -268,48 +443,100 @@
           alert('Tu navegador no soporta HLS');
         }
       </script>
-    </div>
-    
-    <div class="banner">
-      <h3>🌟 ¿Quieres acceso ilimitado a todo nuestro contenido premium?</h3>
-      <p>Nuestros patrocinadores te ofrecen oportunidades exclusivas. Échales un vistazo:</p>
-    </div>
-    
-    <div class="ad-container ad-highlight">
-      <div class="ad-label">RECOMENDADO POR EXPERTOS</div>
-      <!-- Tercer anuncio -->
-      <script type='text/javascript' src='//pl26364849.profitableratecpm.com/63/c4/ef/63c4ef37398a7c28979f0f2b8e83e1c5.js'></script>
-    </div>
-    
-    <div class="content-area">
-      <h3>Artículos relacionados que podrían interesarte</h3>
-      <div class="related-content">
-        <div class="related-item">
-          <h4>Cómo maximizar tus resultados</h4>
-          <p>Descubre las estrategias que utilizan los profesionales...</p>
-        </div>
-        <div class="related-item">
-          <h4>Los 5 secretos mejor guardados</h4>
-          <p>Información exclusiva que cambiará tu perspectiva...</p>
-        </div>
-        <div class="related-item">
-          <h4>Guía definitiva para principiantes</h4>
-          <p>Todo lo que necesitas saber para comenzar correctamente...</p>
-        </div>
-      </div>
       
-      <div class="ad-container">
-        <!-- Cuarto anuncio -->
+      <!-- Cuarto anuncio debajo del video -->
+      <div class="ad-container ad-highlight">
+        <div class="ad-label">¡MIENTRAS VES EL VIDEO!</div>
         <script async="async" data-cfasync="false" src="//pl26364851.profitableratecpm.com/c3772adff43aba2ccae55611da999d7e/invoke.js"></script> 
         <div id="container-c3772adff43aba2ccae55611da999d7e"></div>
       </div>
     </div>
   </div>
   
+  <!-- Pop-up que aparece automáticamente -->
+  <div class="popup-overlay" id="auto-popup">
+    <div class="popup-content">
+      <div class="ribbon">EXCLUSIVO</div>
+      <span class="popup-close" onclick="closePopup('auto-popup')">&times;</span>
+      <h2 class="popup-heading">¡OFERTA ESPECIAL PARA TI!</h2>
+      <p>Has sido seleccionado para acceder a esta oferta única:</p>
+      
+      <!-- Quinto anuncio en pop-up automático -->
+      <div class="ad-container">
+        <a href="https://www.profitableratecpm.com/ki1qmt2i?key=94918e4fd860fdf0f13979fa9a8ce5e3" class="cta-button">¡OFERTA LIMITADA - HAZ CLIC AHORA!</a>
+      </div>
+      
+      <p>Esta oferta expirará pronto. ¡No pierdas la oportunidad!</p>
+    </div>
+  </div>
+  
+  <!-- Pop-up al hacer scroll -->
+  <div class="popup-overlay" id="scroll-popup">
+    <div class="popup-content">
+      <span class="popup-close" onclick="closePopup('scroll-popup')">&times;</span>
+      <h2 class="popup-heading">¡ESPERA UN MOMENTO!</h2>
+      <p>Antes de continuar, no te pierdas esta oferta única:</p>
+      
+      <!-- Primer anuncio en pop-up de scroll -->
+      <div class="ad-container">
+        <script type="text/javascript"> atOptions = { 'key' : 'f6088f4d0f8e60d5aa5832d5695753bb', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} }; </script> 
+        <script type="text/javascript" src="//www.highperformanceformat.com/f6088f4d0f8e60d5aa5832d5695753bb/invoke.js"></script>
+      </div>
+      
+      <p>Sólo disponible para los primeros 100 visitantes de hoy.</p>
+    </div>
+  </div>
+  
+  <!-- Interstitial (aparece entre navegación) -->
+  <div class="interstitial" id="interstitial">
+    <div class="interstitial-content">
+      <h2 class="popup-heading">ANUNCIO ESPECIAL</h2>
+      <p>Este anuncio desaparecerá en:</p>
+      <div class="interstitial-timer" id="interstitial-timer">5</div>
+      
+      <!-- Tercer anuncio en interstitial -->
+      <div class="ad-container">
+        <script type='text/javascript' src='//pl26364849.profitableratecpm.com/63/c4/ef/63c4ef37398a7c28979f0f2b8e83e1c5.js'></script>
+      </div>
+      
+      <button class="interstitial-close" id="interstitial-close" disabled>Espera para continuar...</button>
+    </div>
+  </div>
+  
+  <!-- Pop-up de intento de salida -->
+  <div class="exit-intent" id="exit-popup">
+    <div class="exit-intent-content">
+      <span class="exit-intent-close" onclick="closePopup('exit-popup')">&times;</span>
+      <h2 class="popup-heading">¡ESPERA! ¡NO TE VAYAS!</h2>
+      <p>Te estás perdiendo una oferta exclusiva solo para visitantes de hoy:</p>
+      
+      <!-- Cuarto anuncio en pop-up de salida -->
+      <div class="ad-container">
+        <script async="async" data-cfasync="false" src="//pl26364851.profitableratecpm.com/c3772adff43aba2ccae55611da999d7e/invoke.js"></script> 
+        <div id="container-c3772adff43aba2ccae55611da999d7e"></div>
+      </div>
+      
+      <a href="https://www.profitableratecpm.com/ki1qmt2i?key=94918e4fd860fdf0f13979fa9a8ce5e3" class="cta-button">¡ÚLTIMA OPORTUNIDAD - HAZ CLIC AHORA!</a>
+    </div>
+  </div>
+  
+  <!-- Anuncio flotante -->
+  <div class="floating-ad" id="floating-ad">
+    <span class="floating-ad-close" onclick="document.getElementById('floating-ad').style.display='none'">&times;</span>
+    <div class="ad-label">OFERTA ESPECIAL</div>
+    <p><strong>¡Solo por hoy!</strong></p>
+    
+    <!-- Quinto anuncio en flotante -->
+    <a href="https://www.profitableratecpm.com/ki1qmt2i?key=94918e4fd860fdf0f13979fa9a8ce5e3" class="cta-button">¡VER OFERTA AHORA!</a>
+  </div>
+  
+  <!-- Anuncio sticky en la parte inferior -->
   <div class="sticky-ad">
-    <div class="ad-label">OFERTA ESPECIAL - ¡ÚLTIMO MINUTO!</div>
-    <!-- Quinto anuncio (enlace profitableratecpm) -->
-    <a href="https://www.profitableratecpm.com/ki1qmt2i?key=94918e4fd860fdf0f13979fa9a8ce5e3" class="cta-button">¡ACCEDE AHORA A LA OFERTA ESPECIAL!</a>
+    <div class="ad-label">¡ÚLTIMA OPORTUNIDAD!</div>
+    
+    <!-- Segundo anuncio en sticky -->
+    <script type="text/javascript"> atOptions = { 'key' : 'd5057e78d993d8d7e4b858d86eecb789', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </script> 
+    <script type="text/javascript" src="//www.highperformanceformat.com/d5057e78d993d8d7e4b858d86eecb789/invoke.js"></script>
   </div>
 
   <script>
@@ -337,9 +564,72 @@
       }, 1000);
     }
     
-    // Inicia el contador cuando se carga la página
+    // Funciones para los pop-ups
+    function openPopup(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+    
+    function closePopup(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+    
+    // Temporizador para interstitial
+    function startInterstitialTimer() {
+      let seconds = 5;
+      const timer = document.getElementById('interstitial-timer');
+      const closeButton = document.getElementById('interstitial-close');
+      
+      const interstitialInterval = setInterval(function() {
+        seconds--;
+        timer.innerHTML = seconds;
+        
+        if (seconds <= 0) {
+          clearInterval(interstitialInterval);
+          closeButton.disabled = false;
+          closeButton.innerHTML = 'Continuar';
+          closeButton.addEventListener('click', function() {
+            closePopup('interstitial');
+          });
+        }
+      }, 1000);
+    }
+    
+    // Detectar intento de salida
+    function setupExitIntent() {
+      document.addEventListener('mouseleave', function(e) {
+        if (e.clientY < 0 && !sessionStorage.getItem('exitShown')) {
+          openPopup('exit-popup');
+          sessionStorage.setItem('exitShown', 'true');
+        }
+      });
+    }
+    
+    // Iniciar todo cuando la página carga
     window.onload = function() {
       startCountdown();
+      
+      // Mostrar pop-up automático después de 3 segundos
+      setTimeout(function() {
+        openPopup('auto-popup');
+      }, 3000);
+      
+      // Mostrar pop-up de scroll después de cierto desplazamiento
+      let scrollShown = false;
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 400 && !scrollShown) {
+          openPopup('scroll-popup');
+          scrollShown = true;
+        }
+      });
+      
+      // Mostrar interstitial después de 15 segundos
+      setTimeout(function() {
+        openPopup('interstitial');
+        startInterstitialTimer();
+      }, 15000);
+      
+      // Configurar detección de intento de salida
+      setupExitIntent();
     };
   </script>
 </body>
