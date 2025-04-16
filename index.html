@@ -2,41 +2,345 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Reproductor HLS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contenido Premium - Acceso Exclusivo</title>
   <style>
     body {
-      background-color: #000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
     }
+    
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    
+    .content-area {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+    
+    .video-container {
+      background-color: #000;
+      padding: 2rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+      text-align: center;
+    }
+    
     video {
-      width: 80%;
+      width: 100%;
       max-width: 800px;
       border: 2px solid #fff;
       border-radius: 10px;
     }
+    
+    .ad-container {
+      margin: 2rem 0;
+      text-align: center;
+      position: relative;
+    }
+    
+    .ad-label {
+      background-color: rgba(255,255,0,0.2);
+      border: 1px solid #ffd700;
+      border-radius: 4px;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #d35400;
+      text-align: center;
+      animation: pulse 2s infinite;
+    }
+    
+    .ad-highlight {
+      border: 2px solid #3498db;
+      border-radius: 8px;
+      padding: 1rem;
+      background-color: #f0f8ff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .ad-highlight:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background-color: #e74c3c;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 1rem 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .cta-button:hover {
+      background-color: #c0392b;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+    }
+    
+    .urgent-notice {
+      background-color: #ffe6e6;
+      border-left: 4px solid #ff6b6b;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+    
+    .countdown {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #e74c3c;
+      margin: 1rem 0;
+    }
+    
+    .testimonial {
+      font-style: italic;
+      background-color: #f9f9f9;
+      padding: 1rem;
+      border-left: 3px solid #3498db;
+      margin: 1rem 0;
+    }
+    
+    .social-proof {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      color: #7f8c8d;
+    }
+    
+    .stars {
+      color: #f1c40f;
+      letter-spacing: 2px;
+      margin-right: 0.5rem;
+    }
+    
+    .sticky-ad {
+      position: sticky;
+      bottom: 0;
+      background-color: white;
+      padding: 1rem;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 100;
+      border-top: 1px solid #e0e0e0;
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+    
+    .separator {
+      height: 1px;
+      background-color: #e0e0e0;
+      margin: 2rem 0;
+    }
+    
+    .limited-offer {
+      background: linear-gradient(135deg, #fff6e6, #ffebcc);
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px dashed #ff9800;
+      margin: 1.5rem 0;
+    }
+    
+    .banner {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    
+    .related-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .related-item {
+      background-color: white;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .related-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
-  <video id="video" controls autoplay></video>
+  <header>
+    <h1>Contenido Premium Exclusivo</h1>
+    <p>Accede a nuestro contenido de alta calidad ahora mismo</p>
+  </header>
+  
+  <div class="container">
+    <div class="urgent-notice">
+      <h3>⚠️ AVISO IMPORTANTE</h3>
+      <p>Debido a la alta demanda, este contenido estará disponible por <strong>tiempo limitado</strong>. ¡No pierdas esta oportunidad!</p>
+      <div class="countdown" id="countdown">Oferta expira en: 05:00</div>
+    </div>
+    
+    <div class="content-area">
+      <h2>Bienvenido a nuestra plataforma exclusiva</h2>
+      <p>Estás a punto de descubrir contenido premium que ha ayudado a miles de personas a transformar sus vidas. Antes de continuar, échale un vistazo a estas ofertas especialmente seleccionadas para ti.</p>
+      
+      <div class="ad-container ad-highlight">
+        <div class="ad-label">OFERTA RECOMENDADA PARA TI</div>
+        <!-- Primer anuncio -->
+        <script type="text/javascript"> atOptions = { 'key' : 'f6088f4d0f8e60d5aa5832d5695753bb', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} }; </script> 
+        <script type="text/javascript" src="//www.highperformanceformat.com/f6088f4d0f8e60d5aa5832d5695753bb/invoke.js"></script>
+        <p><strong>👆 El 94% de nuestros usuarios recomiendan este producto</strong></p>
+      </div>
+      
+      <div class="testimonial">
+        "Nunca pensé que encontraría algo tan útil. Definitivamente cambió mi perspectiva y me ayudó a alcanzar mis metas más rápido." - María G.
+      </div>
+      
+      <div class="social-proof">
+        <span class="stars">★★★★★</span> 4.9/5 basado en 278 opiniones verificadas
+      </div>
+      
+      <h3>¿Por qué elegir nuestro contenido?</h3>
+      <p>Nuestros expertos han desarrollado métodos probados que te garantizan resultados reales. A diferencia de otras plataformas, nosotros nos enfocamos en soluciones prácticas y efectivas.</p>
+      
+      <a href="#" class="cta-button">DESCUBRE MÁS AHORA</a>
+    </div>
+    
+    <div class="limited-offer">
+      <h3>🔥 OFERTA RELÁMPAGO 🔥</h3>
+      <p>Esta oferta especial está disponible solo para los próximos visitantes. ¡No te la pierdas!</p>
+      
+      <div class="ad-container">
+        <!-- Segundo anuncio -->
+        <script type="text/javascript"> atOptions = { 'key' : 'd5057e78d993d8d7e4b858d86eecb789', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </script> 
+        <script type="text/javascript" src="//www.highperformanceformat.com/d5057e78d993d8d7e4b858d86eecb789/invoke.js"></script>
+      </div>
+    </div>
+    
+    <div class="separator"></div>
+    
+    <div class="video-container">
+      <h3 style="color: white;">Contenido Exclusivo</h3>
+      <video id="video" controls autoplay></video>
+      <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+      <script>
+        const video = document.getElementById('video');
+        const videoSrc = 'https://prueba.com/stream.m3u8';
+        if (Hls.isSupported()) {
+          const hls = new Hls();
+          hls.loadSource(videoSrc);
+          hls.attachMedia(video);
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = videoSrc;
+        } else {
+          alert('Tu navegador no soporta HLS');
+        }
+      </script>
+    </div>
+    
+    <div class="banner">
+      <h3>🌟 ¿Quieres acceso ilimitado a todo nuestro contenido premium?</h3>
+      <p>Nuestros patrocinadores te ofrecen oportunidades exclusivas. Échales un vistazo:</p>
+    </div>
+    
+    <div class="ad-container ad-highlight">
+      <div class="ad-label">RECOMENDADO POR EXPERTOS</div>
+      <!-- Tercer anuncio -->
+      <script type='text/javascript' src='//pl26364849.profitableratecpm.com/63/c4/ef/63c4ef37398a7c28979f0f2b8e83e1c5.js'></script>
+    </div>
+    
+    <div class="content-area">
+      <h3>Artículos relacionados que podrían interesarte</h3>
+      <div class="related-content">
+        <div class="related-item">
+          <h4>Cómo maximizar tus resultados</h4>
+          <p>Descubre las estrategias que utilizan los profesionales...</p>
+        </div>
+        <div class="related-item">
+          <h4>Los 5 secretos mejor guardados</h4>
+          <p>Información exclusiva que cambiará tu perspectiva...</p>
+        </div>
+        <div class="related-item">
+          <h4>Guía definitiva para principiantes</h4>
+          <p>Todo lo que necesitas saber para comenzar correctamente...</p>
+        </div>
+      </div>
+      
+      <div class="ad-container">
+        <!-- Cuarto anuncio -->
+        <script async="async" data-cfasync="false" src="//pl26364851.profitableratecpm.com/c3772adff43aba2ccae55611da999d7e/invoke.js"></script> 
+        <div id="container-c3772adff43aba2ccae55611da999d7e"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="sticky-ad">
+    <div class="ad-label">OFERTA ESPECIAL - ¡ÚLTIMO MINUTO!</div>
+    <!-- Quinto anuncio (enlace profitableratecpm) -->
+    <a href="https://www.profitableratecpm.com/ki1qmt2i?key=94918e4fd860fdf0f13979fa9a8ce5e3" class="cta-button">¡ACCEDE AHORA A LA OFERTA ESPECIAL!</a>
+  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
-    const video = document.getElementById('video');
-    const videoSrc = 'https://prueba.com/stream.m3u8'; // Pega tu URL m3u8 aquí
-
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(videoSrc);
-      hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoSrc;
-    } else {
-      alert('Tu navegador no soporta HLS');
+    // Contador regresivo
+    function startCountdown() {
+      let minutes = 5;
+      let seconds = 0;
+      
+      const countdownInterval = setInterval(function() {
+        if (seconds === 0) {
+          if (minutes === 0) {
+            clearInterval(countdownInterval);
+            document.getElementById('countdown').innerHTML = "¡OFERTA EXPIRADA!";
+            return;
+          }
+          minutes--;
+          seconds = 59;
+        } else {
+          seconds--;
+        }
+        
+        const formattedMinutes = String(minutes).padStart(2, '0');
+        const formattedSeconds = String(seconds).padStart(2, '0');
+        document.getElementById('countdown').innerHTML = `Oferta expira en: ${formattedMinutes}:${formattedSeconds}`;
+      }, 1000);
     }
+    
+    // Inicia el contador cuando se carga la página
+    window.onload = function() {
+      startCountdown();
+    };
   </script>
 </body>
 </html>
