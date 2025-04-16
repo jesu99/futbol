@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contenido Premium - Acceso Exclusivo</title>
   <style>
+    /* Estilos base */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -12,6 +13,7 @@
       background-color: #f8f9fa;
       color: #333;
       line-height: 1.6;
+      overflow-x: hidden; /* Prevenir scroll horizontal en móviles */
     }
     
     header {
@@ -23,30 +25,32 @@
     }
     
     .container {
+      width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 1rem;
+      padding: 0.5rem;
+      box-sizing: border-box;
     }
     
     .content-area {
       background-color: white;
-      padding: 2rem;
+      padding: 1rem;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
     
     .video-container {
       background-color: #000;
-      padding: 2rem;
+      padding: 1rem;
       border-radius: 8px;
-      margin: 2rem 0;
+      margin: 1rem 0;
       text-align: center;
     }
     
     video {
       width: 100%;
-      max-width: 800px;
+      max-height: 300px;
       border: 2px solid #fff;
       border-radius: 10px;
     }
@@ -55,6 +59,25 @@
       margin: 1rem 0;
       text-align: center;
       position: relative;
+      overflow: hidden; /* Para contenidos de anuncios */
+      max-width: 100%;
+    }
+    
+    /* Contenedor responsivo para anuncios */
+    .ad-responsive {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 25%; /* Aspecto proporcional */
+      overflow: hidden;
+    }
+    
+    .ad-responsive iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
     
     .ad-label {
@@ -67,21 +90,17 @@
       color: #d35400;
       text-align: center;
       animation: pulse 2s infinite;
+      font-size: 0.9rem;
     }
     
     .ad-highlight {
       border: 2px solid #3498db;
       border-radius: 8px;
-      padding: 1rem;
+      padding: 0.75rem;
       background-color: #f0f8ff;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
-      margin: 1.5rem 0;
-    }
-    
-    .ad-highlight:hover {
-      transform: scale(1.02);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      margin: 1rem 0;
     }
     
     .cta-button {
@@ -95,6 +114,19 @@
       margin: 1rem 0;
       transition: all 0.3s ease;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      width: auto;
+      text-align: center;
+    }
+    
+    /* Botón adaptable para móvil */
+    @media (max-width: 768px) {
+      .cta-button {
+        display: block;
+        width: 90%;
+        margin: 1rem auto;
+        padding: 1rem 0.5rem;
+        font-size: 1rem;
+      }
     }
     
     .cta-button:hover {
@@ -140,27 +172,43 @@
       margin-right: 0.5rem;
     }
     
+    /* Sticky ad optimizado para móvil */
     .sticky-ad {
       position: sticky;
       bottom: 0;
+      left: 0;
+      width: 100%;
       background-color: white;
-      padding: 1rem;
+      padding: 0.5rem;
       box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
       z-index: 100;
       border-top: 1px solid #e0e0e0;
+      box-sizing: border-box;
     }
     
+    /* Ajustes de floating-ad para móvil */
     .floating-ad {
       position: fixed;
-      bottom: 80px;
-      right: 20px;
+      bottom: 70px;
+      right: 10px;
       z-index: 1000;
-      width: 250px;
+      width: 200px;
       background-color: white;
       border-radius: 8px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      padding: 1rem;
+      padding: 0.75rem;
       animation: bounce 2s infinite;
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 480px) {
+      .floating-ad {
+        width: 150px;
+        right: 5px;
+        bottom: 60px;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+      }
     }
     
     .floating-ad-close {
@@ -183,6 +231,7 @@
       100% { opacity: 1; }
     }
     
+    /* Optimizaciones para popups en móvil */
     .popup-overlay {
       position: fixed;
       top: 0;
@@ -194,31 +243,49 @@
       display: none;
       justify-content: center;
       align-items: center;
+      overflow-y: auto;
+      padding: 1rem;
+      box-sizing: border-box;
     }
     
     .popup-content {
       background-color: white;
       border-radius: 8px;
-      padding: 2rem;
-      max-width: 600px;
+      padding: 1.5rem 1rem;
       width: 90%;
+      max-width: 450px;
       position: relative;
       box-shadow: 0 0 30px rgba(0,0,0,0.3);
       text-align: center;
+      margin: auto;
     }
     
     .popup-close {
       position: absolute;
-      top: 10px;
-      right: 15px;
+      top: 5px;
+      right: 10px;
       font-size: 24px;
       cursor: pointer;
       color: #333;
+      z-index: 1;
+      padding: 5px;
     }
     
     .popup-heading {
       color: #e74c3c;
       animation: pulse 1s infinite;
+      font-size: 1.3rem;
+      margin-top: 0.5rem;
+    }
+    
+    @media (max-width: 480px) {
+      .popup-heading {
+        font-size: 1.1rem;
+      }
+      
+      .popup-content {
+        padding: 1rem 0.5rem;
+      }
     }
     
     .ribbon {
@@ -231,16 +298,30 @@
       font-weight: bold;
       transform: rotate(45deg) translateX(30px) translateY(-10px);
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      font-size: 0.8rem;
     }
     
+    /* Banner superior móvil */
     .top-banner {
       background: linear-gradient(135deg, #ff9966, #ff5e62);
       color: white;
-      padding: 1rem;
+      padding: 0.5rem;
       text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       position: relative;
       overflow: hidden;
+    }
+    
+    @media (max-width: 480px) {
+      .top-banner h3 {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+      }
+      
+      .top-banner p {
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+      }
     }
     
     .glow {
@@ -262,9 +343,11 @@
       padding: 0.5rem;
       text-align: center;
       font-weight: bold;
-      margin: 1rem 0;
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
     }
     
+    /* Ocultar top-right-ad en móvil y tablets */
     .top-right-ad {
       position: fixed;
       top: 20px;
@@ -275,6 +358,12 @@
       border-radius: 8px;
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
       padding: 0.5rem;
+    }
+    
+    @media (max-width: 992px) {
+      .top-right-ad {
+        display: none;
+      }
     }
     
     .shake {
@@ -288,6 +377,7 @@
       94%, 98% { transform: translate3d(5px, 0, 0); }
     }
     
+    /* Interstitial móvil */
     .interstitial {
       position: fixed;
       top: 0;
@@ -300,16 +390,18 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      overflow-y: auto;
     }
     
     .interstitial-content {
-      max-width: 800px;
-      width: 90%;
+      max-width: 320px;
+      width: 95%;
       text-align: center;
-      padding: 2rem;
+      padding: 1rem;
       background-color: white;
       border-radius: 8px;
       box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      margin: auto;
     }
     
     .interstitial-close {
@@ -317,9 +409,10 @@
       background-color: #333;
       color: white;
       border: none;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1.5rem;
       border-radius: 4px;
       cursor: pointer;
+      font-weight: bold;
     }
     
     .interstitial-timer {
@@ -329,6 +422,7 @@
       color: #e74c3c;
     }
     
+    /* Exit intent para móvil */
     .exit-intent {
       position: fixed;
       top: 0;
@@ -340,24 +434,27 @@
       display: none;
       justify-content: center;
       align-items: center;
+      overflow-y: auto;
     }
     
     .exit-intent-content {
       background-color: white;
-      padding: 2rem;
+      padding: 1.5rem 1rem;
       border-radius: 8px;
-      max-width: 600px;
       width: 90%;
+      max-width: 320px;
       text-align: center;
       position: relative;
+      margin: auto;
     }
     
     .exit-intent-close {
       position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 24px;
+      top: 5px;
+      right: 10px;
+      font-size: 20px;
       cursor: pointer;
+      padding: 5px;
     }
     
     .highlight-text {
@@ -365,70 +462,127 @@
       padding: 0 5px;
       font-weight: bold;
     }
+    
+    /* Media queries adicionales para dispositivos móviles */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
+      }
+      
+      h3 {
+        font-size: 1.1rem;
+      }
+      
+      p {
+        font-size: 0.95rem;
+      }
+      
+      .container {
+        padding: 0.25rem;
+      }
+      
+      .content-area, .video-container {
+        padding: 0.75rem;
+      }
+      
+      /* Reducir número de popups para móvil */
+      body.mobile-view .top-right-ad,
+      body.mobile-view .floating-ad {
+        display: none;
+      }
+    }
+    
+    /* Ajustes específicos para teléfonos pequeños */
+    @media (max-width: 380px) {
+      .popup-content,
+      .interstitial-content,
+      .exit-intent-content {
+        width: 95%;
+        padding: 1rem 0.5rem;
+      }
+      
+      .cta-button {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .ad-label {
+        font-size: 0.8rem;
+        padding: 0.25rem;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="top-banner">
-    <h3 class="glow">🔥 ¡OFERTA EXCLUSIVA SOLO HOY! 🔥</h3>
-    <p>Accede a nuestro contenido premium con un <span class="highlight-text">50% DE DESCUENTO</span></p>
-    <!-- Primer anuncio en banner superior -->
+    <h3 class="glow">🔥 ¡OFERTA EXCLUSIVA HOY! 🔥</h3>
+    <p>Accede a nuestro contenido premium con un <span class="highlight-text">50% DESCUENTO</span></p>
+    <!-- Banner ad responsive -->
     <div class="ad-container">
-      <script type="text/javascript"> atOptions = { 'key' : 'f6088f4d0f8e60d5aa5832d5695753bb', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} }; </script> 
-      <script type="text/javascript" src="https://bmv3.fubohd.com/espn/mono.m3u8?token=6c3d4411a2bbe101d69758e3bb20fde3b0bdd75c-a4-1744833603-1744815603"></script>
+      <div class="ad-responsive">
+        <script type="text/javascript"> atOptions = { 'key' : 'f6088f4d0f8e60d5aa5832d5695753bb', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} }; </script> 
+        <script type="text/javascript" src="//www.highperformanceformat.com/f6088f4d0f8e60d5aa5832d5695753bb/invoke.js"></script>
+      </div>
     </div>
   </div>
   
   <header>
     <h1>Contenido Premium Exclusivo</h1>
-    <p>Accede a nuestro contenido de alta calidad ahora mismo</p>
+    <p>Accede a nuestro contenido de alta calidad ahora</p>
   </header>
   
   <div class="top-right-ad shake">
     <div class="ad-label">OFERTA ESPECIAL</div>
-    <!-- Tercer anuncio en esquina superior derecha -->
+    <!-- Anuncio en esquina superior derecha (oculto en móvil) -->
     <script type='text/javascript' src='//pl26364849.profitableratecpm.com/63/c4/ef/63c4ef37398a7c28979f0f2b8e83e1c5.js'></script>
   </div>
   
   <div class="container">
     <div class="urgent-notice">
       <h3>⚠️ AVISO IMPORTANTE</h3>
-      <p>Debido a la alta demanda, este contenido estará disponible por <strong>tiempo limitado</strong>. ¡No pierdas esta oportunidad!</p>
+      <p>Debido a la alta demanda, este contenido estará disponible por <strong>tiempo limitado</strong>.</p>
       <div class="countdown" id="countdown">Oferta expira en: 05:00</div>
     </div>
     
     <div class="banner-strip">
-      🎁 ¡REGALOS EXCLUSIVOS PARA LOS PRIMEROS 50 VISITANTES DE HOY! 🎁
+      🎁 ¡REGALOS PARA LOS PRIMEROS 50 VISITANTES! 🎁
     </div>
     
     <div class="content-area">
       <h2>Bienvenido a nuestra plataforma exclusiva</h2>
-      <p>Estás a punto de descubrir contenido premium que ha ayudado a miles de personas a transformar sus vidas.</p>
+      <p>Estás a punto de descubrir contenido premium que ha ayudado a miles de personas.</p>
       
-      <!-- Segundo anuncio en medio del contenido principal -->
+      <!-- Anuncio adaptable -->
       <div class="ad-container ad-highlight">
-        <div class="ad-label">RECOMENDADO PARA TI HOY</div>
-        <script type="text/javascript"> atOptions = { 'key' : 'd5057e78d993d8d7e4b858d86eecb789', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </script> 
-        <script type="text/javascript" src="//www.highperformanceformat.com/d5057e78d993d8d7e4b858d86eecb789/invoke.js"></script>
-        <p><strong>👆 El 94% de nuestros usuarios recomiendan este producto</strong></p>
+        <div class="ad-label">RECOMENDADO PARA TI</div>
+        <div class="ad-responsive">
+          <script type="text/javascript"> atOptions = { 'key' : 'd5057e78d993d8d7e4b858d86eecb789', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </script> 
+          <script type="text/javascript" src="//www.highperformanceformat.com/d5057e78d993d8d7e4b858d86eecb789/invoke.js"></script>
+        </div>
+        <p><strong>👆 94% de usuarios recomiendan</strong></p>
       </div>
       
       <div class="testimonial">
-        "Nunca pensé que encontraría algo tan útil. Definitivamente cambió mi perspectiva y me ayudó a alcanzar mis metas más rápido." - María G.
+        "Nunca pensé que encontraría algo tan útil. Definitivamente cambió mi perspectiva." - María G.
       </div>
       
       <div class="social-proof">
-        <span class="stars">★★★★★</span> 4.9/5 basado en 278 opiniones verificadas
+        <span class="stars">★★★★★</span> 4.9/5 (278 opiniones)
       </div>
       
       <h3>¿Por qué elegir nuestro contenido?</h3>
-      <p>Nuestros expertos han desarrollado métodos probados que te garantizan resultados reales. A diferencia de otras plataformas, nosotros nos enfocamos en soluciones prácticas y efectivas.</p>
+      <p>Nuestros expertos han desarrollado métodos probados que te garantizan resultados reales.</p>
       
       <a href="#" class="cta-button">DESCUBRE MÁS AHORA</a>
     </div>
     
     <div class="video-container">
       <h3 style="color: white;">Contenido Exclusivo</h3>
-      <video id="video" controls autoplay></video>
+      <video id="video" controls></video>
       <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
       <script>
         const video = document.getElementById('video');
@@ -444,11 +598,13 @@
         }
       </script>
       
-      <!-- Cuarto anuncio debajo del video -->
+      <!-- Anuncio debajo del video -->
       <div class="ad-container ad-highlight">
         <div class="ad-label">¡MIENTRAS VES EL VIDEO!</div>
-        <script async="async" data-cfasync="false" src="//pl26364851.profitableratecpm.com/c3772adff43aba2ccae55611da999d7e/invoke.js"></script> 
-        <div id="container-c3772adff43aba2ccae55611da999d7e"></div>
+        <div class="ad-responsive">
+          <script async="async" data-cfasync="false" src="//pl26364851.profitableratecpm.com/c3772adff43aba2ccae55611da999d7e/invoke.js"></script> 
+          <div id="container-c3772adff43aba2ccae55611da999d7e"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -458,15 +614,15 @@
     <div class="popup-content">
       <div class="ribbon">EXCLUSIVO</div>
       <span class="popup-close" onclick="closePopup('auto-popup')">&times;</span>
-      <h2 class="popup-heading">¡OFERTA ESPECIAL PARA TI!</h2>
+      <h2 class="popup-heading">¡OFERTA ESPECIAL!</h2>
       <p>Has sido seleccionado para acceder a esta oferta única:</p>
       
-      <!-- Quinto anuncio en pop-up automático -->
+      <!-- Anuncio en pop-up -->
       <div class="ad-container">
-        <a href="https://www.profitableratecpm.com/ki1qmt2i?key=94918e4fd860fdf0f13979fa9a8ce5e3" class="cta-button">¡OFERTA LIMITADA - HAZ CLIC AHORA!</a>
+        <a href="https://www.profitableratecpm.com/ki1qmt2i?key=94918e4fd860fdf0f13979fa9a8ce5e3" class="cta-button">¡OFERTA LIMITADA - CLIC AQUÍ!</a>
       </div>
       
-      <p>Esta oferta expirará pronto. ¡No pierdas la oportunidad!</p>
+      <p>Esta oferta expirará pronto.</p>
     </div>
   </div>
   
@@ -474,16 +630,18 @@
   <div class="popup-overlay" id="scroll-popup">
     <div class="popup-content">
       <span class="popup-close" onclick="closePopup('scroll-popup')">&times;</span>
-      <h2 class="popup-heading">¡ESPERA UN MOMENTO!</h2>
-      <p>Antes de continuar, no te pierdas esta oferta única:</p>
+      <h2 class="popup-heading">¡ESPERA!</h2>
+      <p>No te pierdas esta oferta única:</p>
       
-      <!-- Primer anuncio en pop-up de scroll -->
+      <!-- Anuncio en pop-up de scroll -->
       <div class="ad-container">
-        <script type="text/javascript"> atOptions = { 'key' : 'f6088f4d0f8e60d5aa5832d5695753bb', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} }; </script> 
-        <script type="text/javascript" src="//www.highperformanceformat.com/f6088f4d0f8e60d5aa5832d5695753bb/invoke.js"></script>
+        <div class="ad-responsive">
+          <script type="text/javascript"> atOptions = { 'key' : 'f6088f4d0f8e60d5aa5832d5695753bb', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} }; </script> 
+          <script type="text/javascript" src="//www.highperformanceformat.com/f6088f4d0f8e60d5aa5832d5695753bb/invoke.js"></script>
+        </div>
       </div>
       
-      <p>Sólo disponible para los primeros 100 visitantes de hoy.</p>
+      <p>Sólo para los primeros 100 visitantes de hoy.</p>
     </div>
   </div>
   
@@ -494,12 +652,12 @@
       <p>Este anuncio desaparecerá en:</p>
       <div class="interstitial-timer" id="interstitial-timer">5</div>
       
-      <!-- Tercer anuncio en interstitial -->
+      <!-- Anuncio en interstitial -->
       <div class="ad-container">
         <script type='text/javascript' src='//pl26364849.profitableratecpm.com/63/c4/ef/63c4ef37398a7c28979f0f2b8e83e1c5.js'></script>
       </div>
       
-      <button class="interstitial-close" id="interstitial-close" disabled>Espera para continuar...</button>
+      <button class="interstitial-close" id="interstitial-close" disabled>Espera...</button>
     </div>
   </div>
   
@@ -508,15 +666,17 @@
     <div class="exit-intent-content">
       <span class="exit-intent-close" onclick="closePopup('exit-popup')">&times;</span>
       <h2 class="popup-heading">¡ESPERA! ¡NO TE VAYAS!</h2>
-      <p>Te estás perdiendo una oferta exclusiva solo para visitantes de hoy:</p>
+      <p>Te estás perdiendo una oferta exclusiva:</p>
       
-      <!-- Cuarto anuncio en pop-up de salida -->
+      <!-- Anuncio en pop-up de salida -->
       <div class="ad-container">
-        <script async="async" data-cfasync="false" src="//pl26364851.profitableratecpm.com/c3772adff43aba2ccae55611da999d7e/invoke.js"></script> 
-        <div id="container-c3772adff43aba2ccae55611da999d7e"></div>
+        <div class="ad-responsive">
+          <script async="async" data-cfasync="false" src="//pl26364851.profitableratecpm.com/c3772adff43aba2ccae55611da999d7e/invoke.js"></script> 
+          <div id="container-c3772adff43aba2ccae55611da999d7e"></div>
+        </div>
       </div>
       
-      <a href="https://www.profitableratecpm.com/ki1qmt2i?key=94918e4fd860fdf0f13979fa9a8ce5e3" class="cta-button">¡ÚLTIMA OPORTUNIDAD - HAZ CLIC AHORA!</a>
+      <a href="https://www.profitableratecpm.com/ki1qmt2i?key=94918e4fd860fdf0f13979fa9a8ce5e3" class="cta-button">¡ÚLTIMA OPORTUNIDAD!</a>
     </div>
   </div>
   
@@ -526,20 +686,32 @@
     <div class="ad-label">OFERTA ESPECIAL</div>
     <p><strong>¡Solo por hoy!</strong></p>
     
-    <!-- Quinto anuncio en flotante -->
-    <a href="https://www.profitableratecpm.com/ki1qmt2i?key=94918e4fd860fdf0f13979fa9a8ce5e3" class="cta-button">¡VER OFERTA AHORA!</a>
+    <!-- Anuncio en flotante -->
+    <a href="https://www.profitableratecpm.com/ki1qmt2i?key=94918e4fd860fdf0f13979fa9a8ce5e3" class="cta-button">¡VER OFERTA!</a>
   </div>
   
   <!-- Anuncio sticky en la parte inferior -->
   <div class="sticky-ad">
     <div class="ad-label">¡ÚLTIMA OPORTUNIDAD!</div>
     
-    <!-- Segundo anuncio en sticky -->
-    <script type="text/javascript"> atOptions = { 'key' : 'd5057e78d993d8d7e4b858d86eecb789', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </script> 
-    <script type="text/javascript" src="//www.highperformanceformat.com/d5057e78d993d8d7e4b858d86eecb789/invoke.js"></script>
+    <!-- Anuncio en sticky -->
+    <div class="ad-responsive">
+      <script type="text/javascript"> atOptions = { 'key' : 'd5057e78d993d8d7e4b858d86eecb789', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} }; </script> 
+      <script type="text/javascript" src="//www.highperformanceformat.com/d5057e78d993d8d7e4b858d86eecb789/invoke.js"></script>
+    </div>
   </div>
 
   <script>
+    // Detectar si es móvil
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+    
+    // Aplicar clase para móvil
+    if (isMobile()) {
+      document.body.classList.add('mobile-view');
+    }
+    
     // Contador regresivo
     function startCountdown() {
       let minutes = 5;
@@ -596,40 +768,122 @@
     
     // Detectar intento de salida
     function setupExitIntent() {
-      document.addEventListener('mouseleave', function(e) {
-        if (e.clientY < 0 && !sessionStorage.getItem('exitShown')) {
-          openPopup('exit-popup');
-          sessionStorage.setItem('exitShown', 'true');
+      // En móvil detectamos el scroll hacia arriba rápido
+      if (isMobile()) {
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+          let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          if (scrollTop < lastScrollTop && scrollTop > 100 && !sessionStorage.getItem('exitShown')) {
+            // Detectamos un scroll rápido hacia arriba (posible intento de salida en móvil)
+            openPopup('exit-popup');
+            sessionStorage.setItem('exitShown', 'true');
+          }
+          lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, false);
+      } else {
+        // En desktop detectamos cuando el mouse sale por arriba
+        document.addEventListener('mouseleave', function(e) {
+          if (e.clientY < 0 && !sessionStorage.getItem('exitShown')) {
+            openPopup('exit-popup');
+            sessionStorage.setItem('exitShown', 'true');
+          }
+        });
+      }
+    }
+    
+    // Control de frecuencia de popups para móvil
+    function controlMobilePopups() {
+      if (isMobile()) {
+        // En móvil, reducimos el número de popups y su frecuencia
+        // Solo mostramos un popup después de 5 segundos
+        setTimeout(function() {
+          openPopup('auto-popup');
+        }, 5000);
+        
+        // Reducimos el tiempo de popups
+        let scrollShownMobile = false;
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > window.innerHeight && !scrollShownMobile) {
+            openPopup('scroll-popup');
+            scrollShownMobile = true;
+          }
+        });
+        
+        // En móvil retrasamos el interstitial o lo eliminamos si ya hay muchos popups
+        if (!sessionStorage.getItem('interstitialShown')) {
+          setTimeout(function() {
+            openPopup('interstitial');
+            startInterstitialTimer();
+            sessionStorage.setItem('interstitialShown', 'true');
+          }, 20000);
         }
-      });
+      } else {
+        // Para desktop mantenemos el comportamiento normal
+        setTimeout(function() {
+          openPopup('auto-popup');
+        }, 3000);
+        
+        let scrollShown = false;
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 400 && !scrollShown) {
+            openPopup('scroll-popup');
+            scrollShown = true;
+          }
+        });
+        
+        setTimeout(function() {
+          openPopup('interstitial');
+          startInterstitialTimer();
+        }, 15000);
+      }
+    }
+    
+    // Ajustar elementos según orientación en móvil
+    function handleOrientationChange() {
+      if (isMobile()) {
+        if (window.matchMedia("(orientation: portrait)").matches) {
+          // Orientación vertical - ajustamos elementos para vertical
+          document.querySelectorAll('.popup-content, .interstitial-content, .exit-intent-content').forEach(el => {
+            el.style.width = '90%';
+          });
+        } else {
+          // Orientación horizontal - ajustamos para horizontal
+          document.querySelectorAll('.popup-content, .interstitial-content, .exit-intent-content').forEach(el => {
+            el.style.width = '70%';
+          });
+        }
+      }
+    }
+    
+    // Ajustar tamaño de anuncios para dispositivo
+    function resizeAdsForDevice() {
+      if (isMobile()) {
+        // Ajustar tamaños de contenedores de anuncios para móviles
+        document.querySelectorAll('.ad-responsive').forEach(el => {
+          // Altura proporcional más alta para móviles
+          el.style.paddingBottom = '35%';
+        });
+        
+        // Ocultar algunos anuncios en modo móvil para mejorar experiencia
+        if (window.innerWidth < 480) {
+          document.getElementById('floating-ad').style.display = 'none';
+        }
+      }
     }
     
     // Iniciar todo cuando la página carga
     window.onload = function() {
       startCountdown();
-      
-      // Mostrar pop-up automático después de 3 segundos
-      setTimeout(function() {
-        openPopup('auto-popup');
-      }, 3000);
-      
-      // Mostrar pop-up de scroll después de cierto desplazamiento
-      let scrollShown = false;
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 400 && !scrollShown) {
-          openPopup('scroll-popup');
-          scrollShown = true;
-        }
-      });
-      
-      // Mostrar interstitial después de 15 segundos
-      setTimeout(function() {
-        openPopup('interstitial');
-        startInterstitialTimer();
-      }, 15000);
-      
-      // Configurar detección de intento de salida
       setupExitIntent();
+      controlMobilePopups();
+      handleOrientationChange();
+      resizeAdsForDevice();
+      
+      // Detectar cambios de orientación
+      window.addEventListener('resize', function() {
+        handleOrientationChange();
+        resizeAdsForDevice();
+      });
     };
   </script>
 </body>
